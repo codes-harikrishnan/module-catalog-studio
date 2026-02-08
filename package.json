@@ -1,0 +1,18 @@
+{
+  "name": "smart-module-catalogue-poc",
+  "private": true,
+  "version": "0.2.1",
+  "scripts": {
+    "install:all": "npm --prefix server i && npm --prefix client i",
+    "dev": "concurrently -n SERVER,CLIENT -c auto \"npm --prefix server run dev\" \"npm --prefix client run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7"
+  }
+}

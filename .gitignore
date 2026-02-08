@@ -1,0 +1,8 @@
+node_modules
+.env
+.env.*
+dist
+*.zip
+generated/*
+coverage
+.DS_Store
