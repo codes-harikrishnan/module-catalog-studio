@@ -1,0 +1,71 @@
+:root {
+  --mf-radius: 12px;
+  --mf-px: 16px;
+  --mf-py: 10px;
+  --mf-fs: 14px;
+  --mf-fw: 700;
+
+  /* ✅ CORRECT TOKEN */
+  --mf-primary-bg: #0096fe;
+  --mf-primary-fg: #ffffff;
+
+  --mf-secondary-bg: #111827;
+  --mf-secondary-fg: #ffffff;
+}
+
+.mfRoot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mf-py) var(--mf-px);
+  border-radius: var(--mf-radius);
+  font-size: var(--mf-fs);
+  font-weight: var(--mf-fw);
+  cursor: pointer;
+  gap: 8px;
+}
+
+.mfPrimary {
+  background: var(--mf-primary-bg);
+  color: var(--mf-primary-fg);
+}
+.mfSecondary {
+  background: var(--mf-secondary-bg);
+  color: var(--mf-secondary-fg);
+}
+
+.mfSm {
+  --mf-px: 12px;
+  --mf-py: 8px;
+  --mf-fs: 12px;
+}
+.mfMd {
+  --mf-px: 16px;
+  --mf-py: 10px;
+  --mf-fs: 14px;
+}
+.mfLg {
+  --mf-px: 20px;
+  --mf-py: 12px;
+  --mf-fs: 16px;
+}
+
+.mfDisabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.mfSpinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
