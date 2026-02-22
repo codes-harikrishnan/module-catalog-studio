@@ -80,3 +80,39 @@ Tests (React Testing Library):
 
 
 
+function sanitizeForPreview(source) {
+  let s = source || "";
+
+  // 1) Remove ALL import lines (safe for preview sandbox)
+  // Handles: import X from "y";  import {A} from "y";  import "y";
+  s = s.replace(/^\s*import\s+[^;]*;?\s*$/gm, "");
+
+  // 2) Remove export lines that cause issues in script eval
+  // - export default ...
+  // - export function ...
+  // - export const ...
+  // - export { ... }
+  s = s.replace(/^\s*export\s+\{[^}]*\}\s*;?\s*$/gm, "");
+  s = s.replace(/\bexport\s+default\b/g, "module.exports.default =");
+  s = s.replace(/^\s*export\s+(function|const|let|var|class)\s+/gm, "$1 ");
+
+  // 3) PropTypes: remove any propTypes/defaultProps assignments (preview doesn't need them)
+  // Example: MfButton.propTypes = { ... };
+  s = s.replace(/^\s*\w+\.propTypes\s*=\s*\{[\s\S]*?\}\s*;?\s*$/gm, "");
+  s = s.replace(/^\s*\w+\.defaultProps\s*=\s*\{[\s\S]*?\}\s*;?\s*$/gm, "");
+
+  // 4) Remove CSS imports that sometimes appear (already covered by import removal, but kept for clarity)
+  // import "./MfButton.css";
+  // (No-op now)
+
+  return s.trim();
+}
+
+
+const transformed = Babel.transform(sanitizeForPreview(source), {
+  presets: [
+    ["env", { modules: "commonjs" }],
+    "react"
+  ],
+  sourceType: "script"  // ✅ important in a non-module runtime
+}).code;
